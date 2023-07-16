@@ -33,8 +33,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "gui",
             default_value="true",
-            description="Start Rviz2 and Joint State Publisher gui automatically \
-        with this launch file.",
+            description="Start Rviz2 gui automatically with this launch file.",
         )
     )
 
@@ -53,11 +52,6 @@ def generate_launch_description():
     )
     robot_description = {"robot_description": robot_description_content}
 
-    joint_state_publisher_node = Node(
-        package="joint_state_publisher_gui",
-        executable="joint_state_publisher_gui",
-        condition=IfCondition(gui),
-    )
     robot_state_publisher_node = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
@@ -73,7 +67,6 @@ def generate_launch_description():
     )
 
     nodes = [
-        joint_state_publisher_node,
         robot_state_publisher_node,
         rviz_node,
     ]
